@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <td>first_name</td>
+                    <td>last_name</td>
+                    <td>username</td>
+                    <td>email</td>
+                </tr>
+                <%  dashboard.forEach(group => { %>
+                </tr>
+                    
+              
+              <td><%= group.firstname %> </td>
+              <td><%= group.lastname %> </td>
+              <td><%= group.username %> </td>
+              <td><%= group.email %> </td>
+             
+            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+             
+            </tr>
+
+         <% }); %>
+            </tbody>
+    
+</body>
+</html>

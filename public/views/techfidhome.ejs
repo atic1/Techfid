@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar</title>
+  <link rel="stylesheet" href="css/techfidhome.css">
+</head>
+<body>
+  <nav>
+    <ul class="sidebar">
+      <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+      <li><a href="#" id="home">Home</a></li>      
+      <li><a href="/post">post</a></li>
+      <li><a href="creategroup.html">create group</a></li>
+      <li><a href="#">your post</a></li>
+      <li><a href="signup.html">Login</a></li>
+    </ul>
+    <ul>
+      <li><a href="#homelink">TechFid</a></li>
+      <li class="hideOnMobile"><a href="/post">post</a></li>
+      <li class="hideOnMobile"><a href="creategroup.html">create group</a></li>
+      <li class="hideOnMobile"><a href="#">your post</a></li>
+      
+      <li class="hideOnMobile"><a href="signup.html">Login</a></li>
+      <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <div class="home_post_data">
+        <% techfidhome.forEach(group => { %>
+            <div class="post">
+                <div class="group_div">
+                    <div><a href="" class="page_groupname">t/<%=group.groupname %></a></div>
+
+                    <div class="join_button"><button>Join Group</button></div>
+                </div>
+                <h1 class="page_title"><%=group.header %></h1>
+                <p class="page_description"><%= group.description %></p>
+                <br>
+                <% if(group.images !== null) { %>
+                    <img class="page_image" src="/uploads/<%=group.images%>" alt="Image" ">
+                <% } %>
+                <% if(group.files !== null) { %>
+                    <a class="page_file" href="/uploads/<%=group.files%>" target="_blank">
+                        <i class="fa fa-file-text"></i> View File
+                    </a>
+                <% } %>
+
+                <div class="post_actions">
+                  <button class="likeBtn" post_id="<%= group.id %>">Like (<%= group.like_count %>)</button>
+                  <button class="dislikeBtn" post_id="<%= group.id %>">Dislike (<%= group.dislike_count %>)</button>
+                  <button class="comment_btn">Comment</button>
+                </div>
+                
+
+                <div class="comments_section">
+                    <textarea placeholder="Add a comment..."></textarea>
+                    <button class="submit_comment">Submit</button>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+<div>
+  <a href="/my-posts">hey</a>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket=io()
+    socket.on("newpost",(post)=>{
+    const postelement=document.getElementById("homelink")
+    postelement.textContent=post.number;
+    alert(`New Post: ${post.header} - ${post.description}`);
+
+    
+})
+
+// let update=document.getElementById("homelink")
+// update.addEventListener("click",()=>{
+//     location.reload();
+// }) 
+
+    function showSidebar(){
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'flex'
+    }
+    function hideSidebar(){
+      const sidebar = document.querySelector('.sidebar')
+      sidebar.style.display = 'none'
+    }
+    document.querySelectorAll('.likeBtn').forEach((button) => {
+    button.addEventListener('click', async (e) => {
+      const postId = button.getAttribute('post_id'); // Get the post_id
+      console.log(`Like button clicked. Post ID: ${postId}`);
+      await handleReaction(postId, 'like');
+    });
+  });
+
+  document.querySelectorAll('.dislikeBtn').forEach((button) => {
+    button.addEventListener('click', async (e) => {
+      const postId = button.getAttribute('post_id'); // Get the post_id
+      console.log(`Dislike button clicked. Post ID: ${postId}`);
+      await handleReaction(postId, 'dislike');
+    });
+  });
+
+  // Function to handle reactions
+  async function handleReaction(postId, action) {
+    try {
+      const response = await fetch(`/reaction/${postId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ action }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert('Reaction recorded');
+        window.location.reload(); // Reload to update counts dynamically
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  // Show and hide sidebar functionality
+  function showSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'flex';
+  }
+
+  function hideSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = 'none';
+  }
+
+  console.log("hello 1");
+    
+
+  </script>
+</body>
+</html>
+      
+
+
+
+
+

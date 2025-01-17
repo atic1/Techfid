@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/dashboard.css">
+   
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <title>Dashboard</title>
+</head>
+<body>
+    <div class="everything_of_dashboard">
+        <section class="header">
+            <div class="logo">
+                <i class="ri-menu-line icon icon-0 menu"></i>
+                <h2>TECH<span>FID</span></h2>
+            </div>
+            <div class="search--notification--profile">
+                <div class="search">
+                    <input type="text" placeholder="Search Scdule..">
+                    <button><i class="ri-search-2-line"></i></button>
+                </div>
+                <div class="notification--profile">
+                    <div class="picon lock">
+                        <i class="ri-lock-line"></i>
+                    </div>
+                    <div class="picon bell">
+                        <i class="ri-notification-2-line"></i>
+                    </div>
+                    <div class="picon chat">
+                        <i class="ri-wechat-2-line"></i>
+                    </div>
+                    <div class="picon profile">
+                        <img src="assets/images/profile.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="main">
+            <div class="sidebar">
+                <ul class="sidebar--items">
+                    <li>
+                        <a href="#" id="active--link">
+                            <span class="icon icon-1"><i class="ri-layout-grid-line"></i></span>
+                            <span class="sidebar--item" id="dash">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#groupdetails">
+                            <span class="icon icon-2"><i class="ri-calendar-2-line"></i></span>
+                            <span class="sidebar--item" id="group">Group_info</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#postdetails">
+                            <span class="icon icon-3"><i class="ri-user-2-line"></i></span>
+                            <span class="sidebar--item" style="white-space: nowrap;" id="post">Post_details</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <ul class="sidebar--bottom-items">
+                    <li>
+                        <a href="#">
+                            <span class="icon icon-7"><i class="ri-settings-3-line"></i></span>
+                            <span class="sidebar--item">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="logout">
+                            <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
+                            <span class="sidebar--item">Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="main--content">
+                
+                <div class="recent--patients">
+                    <div class="title">
+                        <h2 class="section--title">User Details </h2>
+                        <button class="add"><i class="ri-add-line"></i><a href="./signup.html">Add users</a></button>
+                    </div>
+                    <div class="table">
+                        <table>
+                            <thead>
+                                
+                                <tbody id="dashboard">
+                                    
+                               
+                                    <tr>
+                                        <td>first_name</td>
+                                        <td>last_name</td>
+                                        <td>username</td>
+                                        <td>email</td>
+                                    </tr>
+                                   
+                                    <%  dashboard.forEach(group => { %>
+                                    </tr>
+                                        
+                                  
+                                  <td><%= group.firstname %> </td>
+                                  <td><%= group.lastname %> </td>
+                                  <td><%= group.username %> </td>
+                                  <td><%= group.email %> </td>
+                                 
+                                <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+                                 
+                                </tr>
+                  
+                             <% }); %>
+                                </tbody>
+    
+                                <tbody id="postdetails">
+                                    <tr>
+                                        <td>Group_name</td>
+                                        <td>Post_title</td>
+                                        <td>Post_description</td>
+                                        <td>FIles</td>
+                                        <td>Images</td>
+                                    </tr>
+                                    <%  postdetails.forEach(group => { %>
+                                    </tr >
+                                  <td><%= group.groupname %> </td>
+                                  <td><%= group.header %> </td>
+                                  <td><%= group.description %> </td>
+                                  <td><%= group.files %> </td>
+                                  <td><%=group.images %></td> 
+                                <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+                                 
+                                </tr>
+                    
+                             <% }); %>
+                                </div>
+                            </tbody>
+                            <tbody id="groupdetails">
+                                <tr>
+                                    <td>groupname</td>
+                                    <td>added_at</td>
+                                </tr>
+                                <% groupinfo.forEach(group=>{ %>
+                                    <tr>
+                                        <td ><%= group.GROUPNAME %></td>
+                                        <td> <%= group.added_at %></td>
+                                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+    
+                                    </tr>
+    
+                               <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+   <div class="loginform">
+        <input class="dashusername" type="text" placeholder="Enter your username">
+        <input class="dashpassword" type="password" placeholder="Enter your password">
+        <input type="submit" value="login" class="loginbutton" name="dashlogin">
+    </div>
+    
+    <script >
+        let menu = document.querySelector('.menu')
+let sidebar = document.querySelector('.sidebar')
+let mainContent = document.querySelector('.main--content')
+menu.onclick = function() {
+    sidebar.classList.toggle('active')
+    mainContent.classList.toggle('active')
+}
+document.addEventListener("DOMContentLoaded",()=>{
+    const deleteButton=document.querySelectorAll(".delete")
+    deleteButton.forEach(button=>{
+        button.addEventListener("click",async(e)=>{ 
+            const row=e.target.closest("tr")
+        const itemid= e.target.getAttribute("data-id")
+        if(confirm("are you sure you want to delete")==true)
+           {
+            row.remove() //removes th from the list from user view
+           } 
+           try{
+            const response=await fetch(`/delete-item/${itemid}`,{
+                method:"DELETE",
+                headers:{
+                    "Content-Type":"application/json",
+                },
+            });
+            if(!response.ok){
+                throw new Error("failed to delete from database")
+                
+            }
+        }catch(error)
+        {
+            console.error("Error in delete operation:", error);
+            
+        }
+        
+    });
+   });
+
+});
+   //dashboard change group
+   const dashboard=document.getElementById("dashboard")
+   const postdetails=document.getElementById("postdetails")
+   const display=document.querySelector("#post")
+   const dashmain=document.querySelector("#dash")
+   const groupdetails=document.querySelector('#groupdetails')
+   const group=document.querySelector('#group')
+
+   display.onclick=()=>{
+     dashboard.style.display="none";
+     groupdetails.style.display="none";
+     postdetails.style.display="table-row-group"
+   }
+   dash.onclick=()=>{
+     postdetails.style.display="none";
+     groupdetails.style.display="none";
+
+     dashboard.style.display="table-row-group"
+     
+   }
+   group.onclick=()=>{
+    postdetails.style.display="none";
+     dashboard.style.display="none";
+
+     groupdetails.style.display="table-row-group"
+
+   }
+   let loginbutton=document.querySelector(".loginbutton")
+
+   loginbutton.onclick=()=>{
+    let dashusername=document.querySelector(".dashusername").value
+   let dashpassword=document.querySelector(".dashpassword").value
+   
+
+    if(dashusername==="admin" && dashpassword==="admin"){
+        console.log(dashusername)
+    let loginform=document.querySelector(".loginform").style.display="none"
+    let main=document.querySelector(".everything_of_dashboard").style.display="block"
+   }
+   else {
+        // Optionally handle invalid credentials
+        alert("Invalid credentials. Please try again.");
+    }
+   }
+   let logout=document.querySelector(".logout")
+   logout.onclick=()=>{
+     let loginform=document.querySelector(".loginform").style.display="block"
+    let main=document.querySelector(".everything_of_dashboard").style.display="none"
+
+   }
+
+
+    </script>
+</body>
+</html>

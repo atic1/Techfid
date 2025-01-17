@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <td>Group_name</td>
+                    <td>Post_title</td>
+                    <td>Post_description</td>
+                    <td>FIles</td>
+                    <td>Images</td>
+                </tr>
+                <tbody>
+                <%  postdetails.forEach(group => { %>
+                </tr>
+                    
+              
+              <td><%= group.groupname %> </td>
+              <td><%= group.header %> </td>
+              <td><%= group.description %> </td>
+             <%if (group.files !==null){%>
+                
+                <td><%= group.files %> </td>
+             <%} else{%>
+                <td></td>
+                <%}%>
+             
+             <%if (group.images && group.images !==null){%>
+                
+                <td><%= group.images %> </td>
+             <%} %>
+             <%} else{%>
+                <td></td>
+                <%}%>
+             
+            <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+             
+            </tr>
+
+         <% }); %>
+            </tbody>
+    
+</body>
+</html>

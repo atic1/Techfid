@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+    <form action="/login" method="post">
+        <div class="container">
+            <input type="checkbox" id="check">
+            <div class="login form">
+              <header>Login</header>
+              <form action="/login">
+                <input name="username" type="text" placeholder="Enter your username">
+                <input name="password" type="text" placeholder="Enter your password">
+                
+                <input type="submit" class="button" value="login">
+              </form>
+              <div class="signup">
+                <span class="signup">Don't have an account?
+                 <label for="check">Signup</label>
+                </span>
+              </div>
+            </div>
+            <div class="registration form">
+              <header>Signup</header>
+              <form action="/signup">
+                <input name="first_name" type="text" placeholder="Enter your firstname">
+                 <input name="last_name" type="text" placeholder="Enter your lastname">
+                  <input name="username" type="text" placeholder="enter a new username">
+                    <input name="email" type="text" placeholder="enter your email">
+                 <input name="password" type="text" placeholder="enter your password">
+                <input name="signup"  type="submit" class="button" value="Signup">
+              </form>
+              <div class="signup">
+                <span class="signup">Already have an account?
+                 <label for="check">Login</label>
+                </span>
+              </div>
+            </div>
+          </div>
+    </form>
+    
+</body>
+</html>

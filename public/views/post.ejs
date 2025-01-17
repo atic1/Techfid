@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/post.css">
+    
+</head>
+<body>
+    <div >
+
+    
+    <div class="card ">
+        <div >
+       <label ><h1>create new post</h1></label>
+    </div>
+    <div class="post_data">
+       <form action="/submit" method="post" id="post_form" class="create_post" enctype="multipart/form-data">
+        <select name="groupname" id="groupname">
+            <% post.forEach(group => { %>
+                <option value="<%= group.groupname %>"><%= group.groupname %></option>
+            <% }); %>
+        </select>
+        <label for="">title</label>
+        <input type="text" name="posthead">
+        <label for="">paragraph</label>
+       <textarea type="text" name="postdescription"></textarea>
+       <label for="">files</label>
+       <input type="file"  name="files">
+       
+       <label for="">image</label>
+       <input type="file" accept="image/*" name="images">
+       <input type="submit" value="upload" name="submit">
+       
+        
+   
+       </form>
+    </div>
+</div>
+</div>
+    
+</body>
+</html>
