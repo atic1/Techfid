@@ -70,6 +70,10 @@ app.post("/submit",authenticate,upload.fields([{name:'images'},{name:'files'}]),
                 return res.status(500).send("Database error while validating groupname");
             }
             const groupid=groupResult[0].id
+
+            if (!posthead || !postdescription) {
+                return res.status(400).send("Post head and post description cannot be empty");
+            }
             
     
     
@@ -106,14 +110,16 @@ app.post("/submit",authenticate,upload.fields([{name:'images'},{name:'files'}]),
                     images:images,
                 });
             })
-            res.redirect("/techfidhome");
+            res.redirect("/techfidhome")
         })
+        
     })
 })
 
     app.get('/techfidhome', (req, res) => {
         const sql1 = 'SELECT postinfo.*,newgroup.GROUPNAME AS groupname FROM postinfo JOIN newgroup ON postinfo.groupid=newgroup.id WHERE postinfo.deleted_at=0 ORDER BY id DESC'
         const sql2 = 'SELECT postinfo.*,signup.username AS username FROM postinfo JOIN signup ON postinfo.userid=signup.id WHERE postinfo.deleted_at=0 ORDER BY id DESC'
+        const querye = "SELECT * FROM comments"; 
         
     
     con.query(sql1, (err, result) => {
@@ -129,6 +135,11 @@ app.post("/submit",authenticate,upload.fields([{name:'images'},{name:'files'}]),
                     console.error('Error fetching data:', err);
                     res.status(500).send('Database error');
                 }
+                con.query(querye,(err,result2)=>{
+                    if(err){
+                        console.log(error)
+                    }
+                
 
             // const numbercount=result.map((post,index)=>({
             //     ...post,
@@ -140,11 +151,13 @@ app.post("/submit",authenticate,upload.fields([{name:'images'},{name:'files'}]),
                 techfidhome: result.map((post, index) => ({
                     ...post,
                     number: `Home${index + 1}`,
+                    
 
                     
                    
                     
                 })),
+            })
             });
         });
 

@@ -106,6 +106,76 @@
     color: white;
     font-size: 1.5em;
   }
+  /* General Button Styles */
+.post_actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.likeBtn, .dislikeBtn, .comment_btn, .submit_comment {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0079d3;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.likeBtn:hover, .dislikeBtn:hover, .comment_btn:hover, .submit_comment:hover {
+  background-color: #005bb5;
+}
+
+/* Comments Section Styles */
+.comments_section {
+  margin-top: 20px;
+}
+
+textarea.comment {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.submit_comment {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+/* Responsive Design for Buttons */
+@media (max-width: 768px) {
+  .post_actions {
+      flex-direction: column;
+      gap: 8px;
+  }
+
+  .likeBtn, .dislikeBtn, .comment_btn {
+      width: 100%;
+      text-align: center;
+  }
+
+  .submit_comment {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .likeBtn, .dislikeBtn, .comment_btn, .submit_comment {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+  }
+
+  textarea.comment {
+      font-size: 0.9rem;
+  }
+}
   
 
   @media(max-width: 800px){

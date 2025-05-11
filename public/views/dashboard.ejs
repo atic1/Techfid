@@ -18,24 +18,8 @@
                 <h2>TECH<span>FID</span></h2>
             </div>
             <div class="search--notification--profile">
-                <div class="search">
-                    <input type="text" placeholder="Search Scdule..">
-                    <button><i class="ri-search-2-line"></i></button>
-                </div>
-                <div class="notification--profile">
-                    <div class="picon lock">
-                        <i class="ri-lock-line"></i>
-                    </div>
-                    <div class="picon bell">
-                        <i class="ri-notification-2-line"></i>
-                    </div>
-                    <div class="picon chat">
-                        <i class="ri-wechat-2-line"></i>
-                    </div>
-                    <div class="picon profile">
-                        <img src="assets/images/profile.jpg" alt="">
-                    </div>
-                </div>
+                
+                
             </div>
         </section>
         <section class="main">
@@ -62,12 +46,7 @@
                     
                 </ul>
                 <ul class="sidebar--bottom-items">
-                    <li>
-                        <a href="#">
-                            <span class="icon icon-7"><i class="ri-settings-3-line"></i></span>
-                            <span class="sidebar--item">Settings</span>
-                        </a>
-                    </li>
+                  
                     <li>
                         <a href="#" class="logout">
                             <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
@@ -106,7 +85,7 @@
                                   <td><%= group.username %> </td>
                                   <td><%= group.email %> </td>
                                  
-                                <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+                                <td><span></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
                                  
                                 </tr>
                   
@@ -128,7 +107,7 @@
                                   <td><%= group.description %> </td>
                                   <td><%= group.files %> </td>
                                   <td><%=group.images %></td> 
-                                <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+                                <td><span></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
                                  
                                 </tr>
                     
@@ -144,7 +123,7 @@
                                     <tr>
                                         <td ><%= group.GROUPNAME %></td>
                                         <td> <%= group.added_at %></td>
-                                        <td><span><i class="ri-edit-line edit"></i><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
+                                        <td><span><i class="ri-delete-bin-line delete" data-id=<%=group.id%> ></i></span></td>
     
                                     </tr>
     

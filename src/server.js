@@ -41,6 +41,9 @@ const dashboard=require("./dashboard")
 app.use(dashboard)
 const likedislike=require("./likedislike")
 app.use(likedislike)
+const comment=require("./comment")
+app.use(comment)
+
 
 
 

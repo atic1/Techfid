@@ -14,14 +14,14 @@
       <li><a href="#" id="home">Home</a></li>      
       <li><a href="/post">post</a></li>
       <li><a href="creategroup.html">create group</a></li>
-      <li><a href="#">your post</a></li>
+     
       <li><a href="signup.html">Login</a></li>
     </ul>
     <ul>
       <li><a href="#homelink">TechFid</a></li>
       <li class="hideOnMobile"><a href="/post">post</a></li>
       <li class="hideOnMobile"><a href="creategroup.html">create group</a></li>
-      <li class="hideOnMobile"><a href="#">your post</a></li>
+      
       
       <li class="hideOnMobile"><a href="signup.html">Login</a></li>
       <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
@@ -34,13 +34,13 @@
                 <div class="group_div">
                     <div><a href="" class="page_groupname">t/<%=group.groupname %></a></div>
 
-                    <div class="join_button"><button>Join Group</button></div>
+                    
                 </div>
                 <h1 class="page_title"><%=group.header %></h1>
                 <p class="page_description"><%= group.description %></p>
                 <br>
                 <% if(group.images !== null) { %>
-                    <img class="page_image" src="/uploads/<%=group.images%>" alt="Image" ">
+                    <img class="page_image" src="/uploads/<%=group.images%>" alt="Image" >
                 <% } %>
                 <% if(group.files !== null) { %>
                     <a class="page_file" href="/uploads/<%=group.files%>" target="_blank">
@@ -51,18 +51,29 @@
                 <div class="post_actions">
                   <button class="likeBtn" post_id="<%= group.id %>">Like (<%= group.like_count %>)</button>
                   <button class="dislikeBtn" post_id="<%= group.id %>">Dislike (<%= group.dislike_count %>)</button>
-                  <button class="comment_btn">Comment</button>
+                  <button class="comment_btn" post_id="<%= group.id %>">Comment</button>
                 </div>
                 
+                
+                  <div class="comments_section">
+                      <textarea name="commentofuser" class="comment" post_id="<%= group.id %>" placeholder="Add a comment..."></textarea>
+                      <button class="submit_comment" post_id="<%= group.id %>">Submit</button>
+                      </div>
+                       </div>
+                       
+  
+</div>
 
-                <div class="comments_section">
-                    <textarea placeholder="Add a comment..."></textarea>
-                    <button class="submit_comment">Submit</button>
-                </div>
+                     
+                     
+                       
+                   
+                
+                
             </div>
         <% }) %>
-    </div>
-</div>
+       
+   
 <div>
   <a href="/my-posts">hey</a>
 </div>
@@ -105,7 +116,15 @@
       await handleReaction(postId, 'dislike');
     });
   });
-
+  document.querySelectorAll('.submit_comment').forEach((button) => {
+  button.addEventListener('click', async (e) => {
+    const postId = button.getAttribute('post_id'); // Get the post_id
+    const commentInput = document.querySelector(`textarea[post_id="${postId}"]`).value; // Get the comment related to the specific post
+    console.log(`comment button clicked. Post ID: ${postId}, Comment: ${commentInput}`);
+    await handlecomment(postId, commentInput); // Pass the comment
+    console.log("Comment submitted successfully");
+  });
+});
   // Function to handle reactions
   async function handleReaction(postId, action) {
     try {
@@ -128,6 +147,37 @@
       console.error('Error:', error);
     }
   }
+  async function handlecomment(postId, comment) {
+    try {
+      const response = await fetch(`/comments/${postId}/${comment}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+       
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert('comment recorded');
+        window.location.reload(); // Reload to update counts dynamically
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  document.querySelectorAll('.comment_btn').forEach((button) => {
+    button.addEventListener('click', (e) => {
+        const postId = button.getAttribute('post_id'); // Get post ID from the button
+        console.log(`Fetching comments for post ID: ${postId}`);
+
+        // Redirect user to the comment page with the postId
+        window.location.href = `/comment/${postId}`;
+    });
+});
+
 
   // Show and hide sidebar functionality
   function showSidebar() {
@@ -141,6 +191,8 @@
   }
 
   console.log("hello 1");
+
+  
     
 
   </script>
