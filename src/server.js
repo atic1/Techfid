@@ -10,7 +10,7 @@ const { Server } = require("socket.io");
 const io=new Server(server)
 app.use(cookieParser());
 
-app.set('views', path.join(__dirname, '../public/views')); 
+app.set('views', path.join(__dirname, '../public/views'));
 app.set('view engine', 'ejs');
 const session = require('express-session');
 
